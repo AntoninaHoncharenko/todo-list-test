@@ -14,12 +14,16 @@ interface IProps {
 }
 
 export const TaskForm: React.FC<IProps> = ({ onSubmit }) => {
-  const [title, setTitle] = useState<any>(null);
+  const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
 
-  function setLocalState(form: HTMLFormElement & { title: HTMLInputElement }) {
-    setTitle(form.title.value);
-    setDescription(form.descr.value);
+  function setLocalState(
+    event: HTMLFormElement & { descr: HTMLInputElement } & {
+      title: HTMLInputElement;
+    }
+  ) {
+    setTitle(event.currentTarget.title.value);
+    setDescription(event.currentTarget.descr.value);
   }
 
   function reset(event: React.FormEvent<HTMLFormElement>) {
@@ -30,7 +34,11 @@ export const TaskForm: React.FC<IProps> = ({ onSubmit }) => {
   }
 
   const handleSubmit = (
-    event: React.FormEvent<HTMLFormElement & { title: HTMLInputElement }>
+    event: React.FormEvent<
+      HTMLFormElement & { descr: HTMLInputElement } & {
+        title: HTMLInputElement;
+      }
+    >
   ) => {
     event.preventDefault();
 
