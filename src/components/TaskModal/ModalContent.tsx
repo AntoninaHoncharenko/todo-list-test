@@ -1,6 +1,12 @@
 import { Title } from './ModalContent.styled';
+import { ITask } from '../../types/taskType';
 
-export const ModalContent = ({ task, toggleCompleted }) => {
+interface IProps {
+  task: ITask;
+  toggleCompleted: (taskId: number) => void;
+}
+
+export const ModalContent: React.FC<IProps> = ({ task, toggleCompleted }) => {
   return (
     <div>
       <Title>{task.title}</Title>

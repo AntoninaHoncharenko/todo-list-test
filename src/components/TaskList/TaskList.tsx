@@ -1,7 +1,13 @@
-import { Task } from 'components/Task/Task';
+import { Task } from '../Task/Task';
 import { Table, TableHeadTh } from './TaskList.styled';
+import { ITask } from '../../types/taskType';
 
-export const TaskList = ({ tasks, onModalOpen, toggleCompleted }) => {
+interface IProps {
+  tasks: ITask[];
+  toggleCompleted: (taskId: number) => void;
+}
+
+export const TaskList: React.FC<IProps> = ({ tasks, toggleCompleted }) => {
   return (
     <Table>
       <thead>
@@ -15,12 +21,7 @@ export const TaskList = ({ tasks, onModalOpen, toggleCompleted }) => {
       <tbody>
         {tasks.map(task => {
           return (
-            <Task
-              task={task}
-              key={task.id}
-              onModalOpen={onModalOpen}
-              toggleCompleted={toggleCompleted}
-            />
+            <Task task={task} key={task.id} toggleCompleted={toggleCompleted} />
           );
         })}
       </tbody>

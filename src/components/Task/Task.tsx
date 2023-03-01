@@ -2,12 +2,19 @@ import { ModalContainer } from '../TaskModal/ModalContainer';
 import { ModalContent } from '../TaskModal/ModalContent';
 import { useState } from 'react';
 import { TableTd, TableTr } from './Task.styled';
+import { ITask } from '../../types/taskType';
 
-export const Task = ({ task, toggleCompleted }) => {
+interface IProps {
+  task: ITask;
+  toggleCompleted: (taskId: number) => void;
+}
+
+export const Task: React.FC<IProps> = ({ task, toggleCompleted }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const openModal = event => {
-    if (event.target.nodeName === 'INPUT') {
+  const openModal = (event: React.MouseEvent<HTMLTableRowElement>) => {
+    const target = event.target as HTMLElement;
+    if (target.nodeName === 'INPUT') {
       return;
     }
     setIsOpenModal(true);

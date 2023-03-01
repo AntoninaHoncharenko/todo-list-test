@@ -9,29 +9,35 @@ import {
   Wrap,
 } from './TaskForm.styled';
 
-export const TaskForm = ({ onSubmit }) => {
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
+interface IProps {
+  onSubmit: (title: string, description: string) => void;
+}
 
-  function setLocalState(form) {
+export const TaskForm: React.FC<IProps> = ({ onSubmit }) => {
+  const [title, setTitle] = useState<string | null>(null);
+  const [description, setDescription] = useState<string | null>(null);
+
+  function setLocalState(form: HTMLFormElement & { title: HTMLInputElement }) {
     setTitle(form.title.value);
     setDescription(form.descr.value);
   }
 
-  function reset(event) {
-    event.target.reset();
+  function reset(event: React.FormEvent<HTMLFormElement>) {
+    const form = event.target as HTMLFormElement;
+    form.reset();
     setTitle(null);
     setDescription(null);
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = (
+    event: React.FormEvent<HTMLFormElement & { title: HTMLInputElement }>
+  ) => {
     event.preventDefault();
-    const form = event.target.elements;
 
-    setLocalState(form);
+    setLocalState(event.currentTarget);
 
-    const title = form.title.value;
-    const description = form.descr.value;
+    const title = event.currentTarget.title.value;
+    const description = event.currentTarget.descr.value;
 
     if (title === '' || description === '') {
       return;

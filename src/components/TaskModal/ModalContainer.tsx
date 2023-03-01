@@ -1,7 +1,15 @@
 import ReactDOM from 'react-dom';
 import { Backdrop, ModalBox, CloseBtn } from './ModalContainer.styled';
 
-export const ModalContainer = ({ children, onModalClose }) => {
+interface IProps {
+  onModalClose: () => void;
+  children: JSX.Element;
+}
+
+export const ModalContainer: React.FC<IProps> = ({
+  children,
+  onModalClose,
+}) => {
   return ReactDOM.createPortal(
     <Backdrop>
       <ModalBox>
@@ -11,6 +19,6 @@ export const ModalContainer = ({ children, onModalClose }) => {
         </CloseBtn>
       </ModalBox>
     </Backdrop>,
-    document.getElementById('modal-root')
+    document.getElementById('modal-root') as HTMLElement
   );
 };
