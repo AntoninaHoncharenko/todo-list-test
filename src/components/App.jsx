@@ -1,6 +1,7 @@
 import { TaskForm } from './Task.Form/TaskForm';
 import { TaskList } from './TaskList/TaskList';
 import { useState } from 'react';
+import { Container, Title } from './App.styled';
 
 export const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -9,14 +10,22 @@ export const App = () => {
   const handleSubmit = (title, description) => {
     setId(id + 1);
     const taskId = id;
-    setTasks([...tasks, { title, description, id: taskId }]);
+    setTasks([...tasks, { title, description, id: taskId, completed: false }]);
+  };
+
+  const toggleCompleted = taskId => {
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
+      )
+    );
   };
 
   return (
-    <div>
-      <h1>To do list</h1>
+    <Container>
+      <Title>To do list</Title>
       <TaskForm onSubmit={handleSubmit} />
-      <TaskList tasks={tasks} />
-    </div>
+      <TaskList tasks={tasks} toggleCompleted={toggleCompleted} />
+    </Container>
   );
 };

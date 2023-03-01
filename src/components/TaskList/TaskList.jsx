@@ -1,21 +1,29 @@
 import { Task } from 'components/Task/Task';
+import { Table, TableHeadTh } from './TaskList.styled';
 
-export const TaskList = ({ tasks }) => {
+export const TaskList = ({ tasks, onModalOpen, toggleCompleted }) => {
   return (
-    <table>
+    <Table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>TITLE</th>
-          <th>DESCRIPTION</th>
-          <th>STATUS</th>
+          <TableHeadTh>Id</TableHeadTh>
+          <TableHeadTh>Title</TableHeadTh>
+          <TableHeadTh>Description</TableHeadTh>
+          <TableHeadTh>Status</TableHeadTh>
         </tr>
       </thead>
       <tbody>
         {tasks.map(task => {
-          return <Task task={task} key={task.id} />;
+          return (
+            <Task
+              task={task}
+              key={task.id}
+              onModalOpen={onModalOpen}
+              toggleCompleted={toggleCompleted}
+            />
+          );
         })}
       </tbody>
-    </table>
+    </Table>
   );
 };
