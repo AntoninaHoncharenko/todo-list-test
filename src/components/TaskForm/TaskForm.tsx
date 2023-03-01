@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export const TaskForm: React.FC<IProps> = ({ onSubmit }) => {
-  const [title, setTitle] = useState<string | null>(null);
+  const [title, setTitle] = useState<any>(null);
   const [description, setDescription] = useState<string | null>(null);
 
   function setLocalState(form: HTMLFormElement & { title: HTMLInputElement }) {
