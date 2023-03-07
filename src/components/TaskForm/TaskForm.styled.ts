@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 interface IPropsTitle {
-  title: string | null;
+  titleInput: string | null;
 }
 
 interface IPropsDescr {
-  description: string | null;
+  descriptionInput: string | null;
 }
 
 export const Form = styled.form`
@@ -29,14 +29,14 @@ export const TitleInput = styled.input<IPropsTitle>`
   height: 25px;
   margin-top: 6px;
   padding: 3px 6px;
-  border-color: ${props => (props.title === '' ? 'red' : 'black')};
+  border-color: ${props => (props.titleInput === '' ? 'red' : 'black')};
 `;
 
 export const DescrInput = styled.input<IPropsDescr>`
   height: 25px;
   margin-top: 6px;
   padding: 3px 6px;
-  border-color: ${props => (props.description === '' ? 'red' : 'black')};
+  border-color: ${props => (props.descriptionInput === '' ? 'red' : 'black')};
 `;
 
 export const Button = styled.button`

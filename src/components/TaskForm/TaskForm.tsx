@@ -14,19 +14,19 @@ interface IProps {
 }
 
 export const TaskForm: React.FC<IProps> = ({ onSubmit }) => {
-  const [title, setTitle] = useState<any>(null);
-  const [description, setDescription] = useState<string | null>(null);
+  const [titleInput, setTitleInput] = useState<string | null>(null);
+  const [descriptionInput, setDescriptionInput] = useState<string | null>(null);
 
   function setLocalState(form: HTMLFormElement & { title: HTMLInputElement }) {
-    setTitle(form.title.value);
-    setDescription(form.descr.value);
+    setTitleInput(form.title.value);
+    setDescriptionInput(form.descr.value);
   }
 
   function reset(event: React.FormEvent<HTMLFormElement>) {
     const form = event.target as HTMLFormElement;
     form.reset();
-    setTitle(null);
-    setDescription(null);
+    setTitleInput(null);
+    setDescriptionInput(null);
   }
 
   const handleSubmit = (
@@ -56,10 +56,10 @@ export const TaskForm: React.FC<IProps> = ({ onSubmit }) => {
             type="text"
             name="title"
             placeholder="Enter title"
-            title={title}
+            titleInput={titleInput}
           />
         </Label>
-        {title === '' && <Error>This field is empty</Error>}
+        {titleInput === '' && <Error>This field is empty</Error>}
       </div>
       <div>
         <Label>
@@ -68,10 +68,10 @@ export const TaskForm: React.FC<IProps> = ({ onSubmit }) => {
             type="text"
             name="descr"
             placeholder="Enter description"
-            description={description}
+            descriptionInput={descriptionInput}
           />
         </Label>
-        {description === '' && <Error>This field is empty</Error>}
+        {descriptionInput === '' && <Error>This field is empty</Error>}
       </div>
       <Wrap>
         <Button type="submit">Add task</Button>
